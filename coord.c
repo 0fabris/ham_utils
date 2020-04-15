@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
+#include<math.h>
 #include "coord.h"
 
 coord* getCoordinate(char* loc){
@@ -45,3 +45,39 @@ coord* getCoordinate(char* loc){
 	return co;
 }
 
+char* getLocator(float lat, float lon){
+	//Creating the string
+	char* st = (char*)malloc(7*sizeof(char));
+	
+	//Guess the first 2 chars
+	for(int i = 160,c = 0; i >=-180; i-=20, c++){
+		if(lon>((float)i)){
+			st[0] = 'R'-c;
+        		lon-=(float)i;
+			break;
+		}
+	}
+	
+	for(int i = 80,c = 0; i >= -90; i-=10, c++){
+		if(lat>((float)i)){
+                	st[1] = 'R'-c;
+			lat-=(float)i;
+			break;
+		}
+	}
+	
+	//First 2 chars OK, now 2 numbers
+	st[2] = '0' + ((int)lon/2);
+	st[3] = '0' + ((int)lat/1);
+
+	lon -= 2.0f * ((int)lon/2);
+	lat -= 1.0f * ((int)lat/1);
+	
+	//2 numbers OK, now last 2 chars
+
+	st[4] = 'A' + (int)roundf(10*(60.0f*lon/5.0f))/10;
+	st[5] = 'A' + (int)roundf(10*(60.0f*lat/2.5f))/10;
+	st[6] = '\0';
+	//All OK
+	return st;
+}

@@ -8,5 +8,6 @@ typedef struct {
 } coord;
 
 coord* getCoordinate(char*);
+char* getLocator(float,float);
 
 #endif

@@ -11,6 +11,7 @@ int main(){
         scanf("%s",st);
         
         coord* pnt = getCoordinate(st);
+        
+	printf("coord %s: (%.3f,%.3f)\n\n",pnt->locator,pnt->lat,pnt->lon);
 
-        printf("coord %s: (%.3f,%.3f)\n\n",pnt->locator,pnt->lat,pnt->lon);
 }
