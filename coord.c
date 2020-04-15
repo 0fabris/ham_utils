@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<string.h>
 #include<math.h>
+#include<ctype.h>
+
 #include "coord.h"
 
 coord* getCoordinate(char* loc){
@@ -13,15 +15,11 @@ coord* getCoordinate(char* loc){
 	if(loc[6] == '\0'){
 	
 		//Convert Lowercase to Uppercase
-		if(loc[0]>='a' && loc[0] <= 'z')
-			loc[0] = loc[0] - 'a' + 'A';
-		if(loc[1]>='a' && loc[1] <= 'z')
-			loc[1] = loc[1] - 'a' + 'A';
-		if(loc[4]>='a' && loc[4] <= 'z')
-                        loc[4] = loc[4] - 'a' + 'A';
-                if(loc[5]>='a' && loc[5] <= 'z') 
-                        loc[5] = loc[5] - 'a' + 'A';
-		
+		loc[0] = toupper(loc[0]);
+		loc[1] = toupper(loc[1]);
+		loc[4] = toupper(loc[4]);
+		loc[5] = toupper(loc[5]);
+
 		//creating coord object
 		co = (coord*)malloc(sizeof(coord));
 		co->locator = (char*)malloc(7*sizeof(char));
