@@ -4,14 +4,24 @@ CC = gcc
 FLAG = -g
 DEMOFLAG = -lm
 
-all: demo_build clean
+all: demo_build tle_demo_build clean
 	@echo "All Done!"
 
 demo_build: coord_build
+	@cd wwlocator; \
 	${CC} ${FLAG} ${DEMOFLAG} demo.c coord.o -o built_demo
-	
-coord_build:
-	${CC} ${FLAG} -c coord.c 
 
+coord_build:
+	@cd wwlocator; \
+	${CC} ${FLAG} -c coord.c
+
+tle_demo_build: tle_build
+	@cd tle; \
+	${CC} ${FLAG} ${DEMOFLAG} tledemo.c tle.o -o built_demo
+
+tle_build:
+	@cd tle; \
+	${CC} ${FLAG} -c tle.c 
 clean:
-	rm *.o
+	rm tle/*.o
+	rm wwlocator/*.o

@@ -35,7 +35,7 @@ ffmpeg -loglevel error -i "$audio_name" -ar 11025 -y "$fname";
 #Analyse with wxtoimg
 wxtoimg -l -t NOAA -e MSA-precip -R 1 "$fname" "$image_name";
 
-#Not needed - Picture rotation of 180' 
+#Not needed - Picture rotation of 180' if passage is northbound 
 #convert -rotate 180 "$image_name" "$image_name";
 
 #Clean up

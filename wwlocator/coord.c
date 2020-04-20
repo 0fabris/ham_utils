@@ -25,13 +25,13 @@ coord* getCoordinate(char* loc){
 		co->locator = (char*)malloc(7*sizeof(char));
 		strcpy(co->locator,loc);
 		//Latitude and longitude from first 2 characters
-		for(int i = -180,c = 0; i < 180; i+=20, c++)
-			if(loc[0] == ('A'+c))
-				co->lon = i;
 		for(int i = -90,c = 0; i < 90; i+=10, c++)
+		{
+			if(loc[0] == ('A'+c))
+				co->lon = i*2.0;
 			if(loc[1] == ('A'+c))
 				co->lat = i;
-		
+		}
 		//Number Adjustment 0->9 pass 2-lon, 1-lat
 		co->lon += ((loc[2]-'0')*2.0);
 		co->lat += ((loc[3]-'0')*1.0);
